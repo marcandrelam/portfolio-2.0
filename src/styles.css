@@ -1,0 +1,150 @@
+:root {
+  --cyan: #00fff7;
+  --ink: #000;
+  --paper: #fff;
+  --muted: #8a8a8a;
+  --font-ui: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font-dot: 'Doto', ui-monospace, monospace;
+  /* Menu type scales with the viewport; 61px at 1440 wide matches the wireframe. */
+  --menu-size: clamp(2rem, 4.25vw, 3.8rem);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+/* Black behind every screen, so screen fades pass through black. */
+body {
+  background: #000;
+  color: var(--ink);
+  font-family: var(--font-ui);
+  -webkit-font-smoothing: antialiased;
+}
+
+.screen {
+  min-height: 100%;
+  background: var(--paper);
+}
+
+/* ---------- Main menu ---------- */
+
+.menu {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: clamp(64px, 16vh, 164px) 20px 0;
+}
+
+.menu-title {
+  margin: 0 0 clamp(48px, 10vh, 105px);
+  font-family: var(--font-dot);
+  font-weight: 800;
+  font-size: var(--menu-size);
+  letter-spacing: 0.02em;
+  text-align: center;
+}
+
+.menu-nav {
+  position: relative; /* positions the highlight */
+}
+
+.menu-list {
+  /* Paints the items above the highlight, and is the items' offset parent.
+     It sits at the nav's origin, so item offsets are valid highlight coordinates. */
+  position: relative;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(8px, 2.6vh, 27px);
+}
+
+.menu-item {
+  display: inline-block;
+  padding: 0 10px;
+  font-weight: 500;
+  font-size: var(--menu-size);
+  line-height: 1.23;
+  color: inherit;
+  text-decoration: none;
+  outline: none; /* the highlight is the focus indicator */
+}
+
+.menu-highlight {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: var(--cyan);
+  pointer-events: none;
+}
+
+.menu-hint {
+  margin: auto 0 0;
+  padding: 32px 0;
+  font-family: var(--font-dot);
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+@media (hover: none) {
+  .menu-hint {
+    display: none;
+  }
+}
+
+/* ---------- Section pages ---------- */
+
+.page {
+  min-height: 100vh;
+  padding: 32px clamp(20px, 4vw, 64px) 64px;
+}
+
+.back-button {
+  display: inline-flex;
+  gap: 0.5em;
+  padding: 4px 10px;
+  margin-left: -10px;
+  font-family: var(--font-dot);
+  font-weight: 800;
+  font-size: 20px;
+  color: inherit;
+  text-decoration: none;
+  outline: none;
+}
+
+.back-button:hover,
+.back-button:focus-visible {
+  background: var(--cyan);
+}
+
+.page-title {
+  margin: clamp(48px, 10vh, 120px) 0 32px;
+  font-weight: 500;
+  font-size: clamp(2.5rem, 6vw, 5.5rem);
+  line-height: 1.05;
+}
+
+.placeholder {
+  max-width: 640px;
+  margin: 0;
+  padding: 24px;
+  border: 1px dashed #bbb;
+  font-family: var(--font-dot);
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 1.5;
+  color: #555;
+}
